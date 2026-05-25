@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>韩国釜山旅行行程</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-bg: #FAF8F5;
+            --color-bg-card: #FFFFFF;
+            --color-text: #2C2C2C;
+            --color-text-light: #6B6B6B;
+
+            --color-accent: #C45A3B;
+            --color-accent-light: #E8D5CE;
+
+            --color-sage: #7A8B6E;
+            --color-sage-light: #E8EDE5;
+
+            --color-gold: #B8956E;
+            --color-gold-light: #F5EFE5;
+
+            --color-ocean: #4A7C8C;
+            --color-ocean-light: #E3EEF2;
+
+            --color-hotel: #8B7355;
+            --color-hotel-light: #F5F0EB;
+
+            --color-food: #D4573B;
+            --color-food-light: #FEF0E8;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--color-accent) 0%, #8B3A2A 100%);
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 4px 16px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .hero h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .hero .subtitle {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+        .hero-meta span { white-space: nowrap; }
+
+        /* ===== Container ===== */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 32px 16px 60px;
+        }
+
+        /* ===== Section Title ===== */
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin: 40px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0dcd7;
+        }
+
+        /* ===== Day Card ===== */
+        .day-card {
+            background: var(--color-bg-card);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .day-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .day-header:hover { background: #f9f7f4; }
+
+        .day-label {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-accent);
+            letter-spacing: 1px;
+        }
+        .day-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+        .day-toggle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--color-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, background 0.2s;
+            flex-shrink: 0;
+        }
+        .day-toggle svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--color-text-light);
+            transition: transform 0.3s ease;
+        }
+        .day-card.open .day-toggle svg {
+            transform: rotate(180deg);
+        }
+
+        .day-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .day-card.open .day-content {
+            max-height: 3000px;
+        }
+
+        .day-body {
+            padding: 0 20px 20px;
+        }
+
+        /* ===== Info Blocks ===== */
+        .info-block {
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            border-left: 4px solid;
+            transition: transform 0.2s;
+        }
+        .info-block:last-child { margin-bottom: 0; }
+
+        .info-block .block-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .block-time {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-light);
+            white-space: nowrap;
+        }
+        .block-name {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .block-desc {
+            font-size: 13px;
+            color: var(--color-text-light);
+            margin-top: 2px;
+        }
+        .block-desc a {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .block-addr {
+            font-size: 12px;
+            color: var(--color-text-light);
+            margin-top: 4px;
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+        }
+        .block-addr::before {
+            content: '\1F4CD';
+            flex-shrink: 0;
+        }
+
+        /* Block variants */
+        .info-block.flight {
+            background: var(--color-ocean-light);
+            border-color: var(--color-ocean);
+        }
+        .info-block.flight .block-name { color: var(--color-ocean); }
+
+        .info-block.transport {
+            background: var(--color-sage-light);
+            border-color: var(--color-sage);
+        }
+        .info-block.transport .block-name { color: var(--color-sage); }
+
+        .info-block.hotel {
+            background: var(--color-hotel-light);
+            border-color: var(--color-hotel);
+        }
+        .info-block.hotel .block-name { color: var(--color-hotel); }
+
+        .info-block.food {
+            background: var(--color-food-light);
+            border-color: var(--color-food);
+        }
+        .info-block.food .block-name { color: var(--color-food); }
+
+        .info-block.attraction {
+            background: var(--color-accent-light);
+            border-color: var(--color-accent);
+        }
+        .info-block.attraction .block-name { color: var(--color-accent); }
+
+        .info-block.train {
+            background: var(--color-gold-light);
+            border-color: var(--color-gold);
+        }
+        .info-block.train .block-name { color: var(--color-gold); }
+
+        /* ===== Capsule Info Card ===== */
+        .capsule-card {
+            background: var(--color-gold-light);
+            border: 1px solid var(--color-gold);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 12px 0;
+        }
+        .capsule-card h4 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--color-gold);
+            margin-bottom: 8px;
+        }
+        .capsule-card table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .capsule-card td {
+            padding: 4px 0;
+            vertical-align: top;
+        }
+        .capsule-card td:first-child {
+            color: var(--color-text-light);
+            width: 70px;
+            flex-shrink: 0;
+        }
+        .capsule-card a { color: var(--color-gold); }
+
+        /* ===== Switch Strategy Card ===== */
+        .strategy-card {
+            background: var(--color-ocean-light);
+            border: 1px solid var(--color-ocean);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 12px 0;
+        }
+        .strategy-card h4 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--color-ocean);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .strategy-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        .strategy-table th {
+            background: var(--color-ocean);
+            color: #fff;
+            padding: 6px 8px;
+            text-align: left;
+            font-weight: 500;
+        }
+        .strategy-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid rgba(74,124,140,0.15);
+            vertical-align: top;
+        }
+        .strategy-table tr:last-child td { border-bottom: none; }
+        .strategy-table tr:nth-child(even) td { background: rgba(255,255,255,0.5); }
+
+        /* ===== Reminder ===== */
+        .reminder {
+            background: #FFF8E1;
+            border-left: 4px solid #FFB300;
+            border-radius: 0 8px 8px 0;
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        .reminder strong { color: #E65100; }
+
+        /* ===== Day Theme Tag ===== */
+        .day-theme {
+            display: inline-block;
+            background: var(--color-accent-light);
+            color: var(--color-accent);
+            border-radius: 12px;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            text-align: center;
+            padding: 40px 20px 50px;
+            color: var(--color-text-light);
+            font-size: 14px;
+        }
+        .footer-icon { font-size: 28px; margin-bottom: 8px; }
+        .footer-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 16px;
+            color: var(--color-accent);
+            margin-bottom: 4px;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .hero { padding: 40px 16px 36px; }
+            .hero h1 { font-size: 28px; }
+            .hero-meta { gap: 12px; font-size: 13px; }
+            .container { padding: 24px 12px 40px; }
+            .day-header { padding: 14px 16px; }
+            .day-body { padding: 0 16px 16px; }
+            .info-block { padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-badge">Travel Itinerary</div>
+        <h1>韩国 · 釜山</h1>
+        <p class="subtitle">4 天 3 晚 · 2026 年 6 月 14 日 — 17 日</p>
+        <div class="hero-meta">
+            <span>🛫 北京 → 釜山</span>
+            <span>🏨 Notte La Mia Hotel</span>
+            <span>👤 2 人</span>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="container">
+
+        <div class="section-title">📅 行程安排</div>
+
+        <!-- ===== Day 1 ===== -->
+        <article class="day-card">
+            <div class="day-header" onclick="toggleDay(this)">
+                <div>
+                    <span class="day-label">DAY 01</span>
+                    <span class="day-title">到达 + 西面 City Walk</span>
+                    <span class="day-theme">6/14 周日</span>
+                </div>
+                <div class="day-toggle">
+                    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="day-body">
+
+                    <div class="info-block flight">
+                        <div class="block-header">
+                            <span class="block-time">06:30</span>
+                            <span class="block-name">✈️ 抵达金海机场</span>
+                        </div>
+                        <div class="block-desc">航班 KE2062 · 北京 03:10 → 釜山 06:30</div>
+                    </div>
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">08:00</span>
+                            <span class="block-name">🚇 前往酒店</span>
+                        </div>
+                        <div class="block-desc">机场乘地铁 3 号线 → 南浦洞站，步行至酒店</div>
+                        <div class="block-addr">Notte La Mia Hotel（265 Daeyeong-ro, 东区）</div>
+                    </div>
+
+                    <div class="info-block food">
+                        <div class="block-header">
+                            <span class="block-time">08:30</span>
+                            <span class="block-name">🥣 早餐 · 韩式粥</span>
+                        </div>
+                        <div class="block-addr">地铁 1 号线南浦洞站附近 · 预算约 8,000₩</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">10:30 - 13:30</span>
+                            <span class="block-name">💇🏻 西面美发沙龙</span>
+                        </div>
+                        <div class="block-addr">地铁 1→2 号线西面站</div>
+                    </div>
+
+                    <div class="info-block food">
+                        <div class="block-header">
+                            <span class="block-time">13:30</span>
+                            <span class="block-name">🍚 午餐 · 西面婆婆汤饭</span>
+                        </div>
+                        <div class="block-desc">서면할매국밥 · 猪肉汤饭</div>
+                        <div class="block-addr">西面站 7 号出口步行 3 分钟 · 预算约 9,000₩</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">15:00</span>
+                            <span class="block-name">🚶 City Walk · 西面地下商街</span>
+                        </div>
+                        <div class="block-desc">韩国最大地下商街之一，潮流服饰/美妆/杂货/街头小吃</div>
+                        <div class="block-addr">西面站地下连通 · 🧇 地下街小吃 + 甜品</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">15:45</span>
+                            <span class="block-name">🎮 Switch 2 备选 · Hottracks 西面店</span>
+                        </div>
+                        <div class="block-desc">如果乐天免税店缺货，西面商圈顺路寻找</div>
+                        <div class="block-addr">西面站附近，步行可达</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">16:30</span>
+                            <span class="block-name">🛍️ Olive Young 西面旗舰店</span>
+                        </div>
+                        <div class="block-desc">釜山最大门店之一，品类最全</div>
+                        <div class="block-addr">西面站附近 · 面膜/彩妆/护肤/香氛</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">17:00</span>
+                            <span class="block-name">☕ 西面咖啡街 + 凡一洞</span>
+                        </div>
+                        <div class="block-desc">网红咖啡/设计师小店/韩系穿搭，适合拍照打卡</div>
+                        <div class="block-addr">西面站 3/4 号出口沿路</div>
+                    </div>
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">18:30</span>
+                            <span class="block-name">🚇 前往南浦洞/光复路</span>
+                        </div>
+                        <div class="block-desc">地铁 1 号线西面 → 南浦洞（约 15 分钟）</div>
+                    </div>
+
+                    <div class="info-block food">
+                        <div class="block-header">
+                            <span class="block-time">19:30</span>
+                            <span class="block-name">🌃 BIFF 广场 + 国际市场夜市</span>
+                        </div>
+                        <div class="block-desc">🍢 鱼饼 / 糖饼 / 烤冷面 / 鸡蛋糕 — 釜山年轻人必逛夜市</div>
+                        <div class="block-addr">南浦洞站 7 号出口 · 预算约 20,000₩</div>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+
+        <!-- ===== Day 2 ===== -->
+        <article class="day-card">
+            <div class="day-header" onclick="toggleDay(this)">
+                <div>
+                    <span class="day-label">DAY 02</span>
+                    <span class="day-title">海云台 + 天空胶囊小火车</span>
+                    <span class="day-theme">6/15 周一</span>
+                </div>
+                <div class="day-toggle">
+                    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="day-body">
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">08:30</span>
+                            <span class="block-name">🚇 前往海云台</span>
+                        </div>
+                        <div class="block-addr">地铁 2 号线 · 约 30 分钟</div>
+                    </div>
+
+                    <div class="info-block food">
+                        <div class="block-header">
+                            <span class="block-time">09:30</span>
+                            <span class="block-name">🥞 早餐 · 海云台市场海鲜煎饼</span>
+                        </div>
+                        <div class="block-addr">海云台站 5 号出口 · 预算约 10,000₩</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">10:00</span>
+                            <span class="block-name">🏖️ 海云台海滩拍照</span>
+                        </div>
+                        <div class="block-desc">上午光线最佳时段</div>
+                    </div>
+
+                    <div class="info-block food">
+                        <div class="block-header">
+                            <span class="block-time">12:30</span>
+                            <span class="block-name">🦐 午餐 · 海云台烤贝类</span>
+                        </div>
+                        <div class="block-desc">조개구이 · 烤扇贝/鲍鱼</div>
+                        <div class="block-addr">海云台海水浴场旁 · 预算约 25,000₩</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">14:00</span>
+                            <span class="block-name">🎮 Switch 2 备选 · 新世界免税店</span>
+                        </div>
+                        <div class="block-desc">如果 6/16 乐天免税店没买到，海云台站顺路</div>
+                        <div class="block-addr">地铁 2 号线海云台站 3 号出口，步行 5-8 分钟</div>
+                    </div>
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">14:30</span>
+                            <span class="block-name">🚕 前往尾浦站</span>
+                        </div>
+                        <div class="block-desc">出租车/步行约 10-15 分钟</div>
+                    </div>
+
+                    <div class="info-block train">
+                        <div class="block-header">
+                            <span class="block-time">16:00</span>
+                            <span class="block-name">🚃 天空胶囊小火车</span>
+                        </div>
+                        <div class="block-desc">尾浦 → 青沙浦（单程约 30 分钟，已预约）</div>
+                    </div>
+
+                    <!-- Capsule booking info -->
+                    <div class="capsule-card">
+                        <h4>🚃 Blue Line Park 预约信息</h4>
+                        <table>
+                            <tr><td>官网</td><td><a href="https://www.bluelinepark.com" target="_blank">bluelinepark.com</a></td></tr>
+                            <tr><td>路线</td><td>尾浦站 → 青沙浦站（单程约 30 分钟）</td></tr>
+                            <tr><td>时间</td><td><strong>2026 年 6 月 15 日 16:00-16:30</strong> ✅</td></tr>
+                            <tr><td>票价</td><td>50,000 韩元/车（最多 4 人）</td></tr>
+                            <tr><td>车厢</td><td>天空胶囊小火车（Sky Capsule）</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">16:30</span>
+                            <span class="block-name">☕ 青沙浦/松汀拍照 + 咖啡厅</span>
+                        </div>
+                        <div class="block-desc">松汀海水浴场旁海边咖啡厅</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">18:00</span>
+                            <span class="block-name">🌅 冬柏岛日落</span>
+                        </div>
+                        <div class="block-desc">返回海云台方向，欣赏日落</div>
+                    </div>
+
+                    <div class="info-block food">
+                        <div class="block-header">
+                            <span class="block-time">19:30</span>
+                            <span class="block-name">🐷 晚餐 · 蓝带猪脚</span>
+                        </div>
+                        <div class="block-desc">청돈족발 · 韩式猪脚</div>
+                        <div class="block-addr">海云台区中洞 · 预算约 22,000₩</div>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+
+        <!-- ===== Day 3 ===== -->
+        <article class="day-card">
+            <div class="day-header" onclick="toggleDay(this)">
+                <div>
+                    <span class="day-label">DAY 03</span>
+                    <span class="day-title">购物日 · Switch 2 购买</span>
+                    <span class="day-theme">6/16 周二</span>
+                </div>
+                <div class="day-toggle">
+                    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="day-body">
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">09:00</span>
+                            <span class="block-name">🚇 前往田浦站</span>
+                        </div>
+                        <div class="block-desc">酒店 → 地铁 1 号线田浦站 7 号出口</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">09:30</span>
+                            <span class="block-name">🎮 乐天免税店购买 Switch 2（首选）</span>
+                        </div>
+                        <div class="block-desc">开门即去，避开人流 · 工作日人少，免税+返点</div>
+                        <div class="block-addr">乐天免税店釜山店（田浦站）</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">10:00</span>
+                            <span class="block-name">🎮 备选 · 乐天百货釜山店</span>
+                        </div>
+                        <div class="block-desc">如果乐天免税店缺货，与免税店相邻，步行即达</div>
+                    </div>
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">10:30</span>
+                            <span class="block-name">🚇 前往凡田洞</span>
+                        </div>
+                        <div class="block-desc">地铁 1 号线 → 2 号线</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">11:00</span>
+                            <span class="block-name">🛍️ 乐天奥特莱斯（凡田洞）</span>
+                        </div>
+                        <div class="block-desc">品牌齐全，折扣力度大</div>
+                        <div class="block-addr">凡田洞站 · 营业时间 10:30-20:00</div>
+                    </div>
+
+                    <div class="info-block food">
+                        <div class="block-header">
+                            <span class="block-time">12:30</span>
+                            <span class="block-name">🍜 午餐 · 奥莱美食广场</span>
+                        </div>
+                        <div class="block-desc">炸酱面/快餐</div>
+                        <div class="block-addr">乐天奥特莱斯内 · 预算约 12,000₩</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">13:30</span>
+                            <span class="block-name">🛍️ 继续购物</span>
+                        </div>
+                        <div class="block-addr">凡田洞商圈</div>
+                    </div>
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">17:00</span>
+                            <span class="block-name">🚇 返回酒店</span>
+                        </div>
+                        <div class="block-desc">放战利品，稍作休息</div>
+                    </div>
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">18:00</span>
+                            <span class="block-name">🚇 前往松亭洞</span>
+                        </div>
+                        <div class="block-desc">地铁 2 号线 · 约 35 分钟</div>
+                    </div>
+
+                    <div class="info-block food">
+                        <div class="block-header">
+                            <span class="block-time">19:00</span>
+                            <span class="block-name">🌊 松亭洞海边咖啡厅 + 晚餐</span>
+                        </div>
+                        <div class="block-desc">🥩 松亭烤肠（송정곱창）</div>
+                        <div class="block-addr">松亭海边路 · 预算约 18,000₩</div>
+                    </div>
+
+                    <!-- Switch 2 Strategy -->
+                    <div class="strategy-card">
+                        <h4>🎮 Switch 2 多日购买策略</h4>
+                        <table class="strategy-table">
+                            <thead>
+                                <tr>
+                                    <th>优先级</th>
+                                    <th>日期</th>
+                                    <th>购买点</th>
+                                    <th>说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>① 首选</strong></td><td>6/16 09:30</td><td>乐天免税店（田浦站）</td><td>开门即去，免税+返点</td></tr>
+                                <tr><td><strong>② 紧邻</strong></td><td>6/16 10:00</td><td>乐天百货</td><td>缺货立即转</td></tr>
+                                <tr><td><strong>③ 海云台</strong></td><td>6/15 14:00</td><td>新世界免税店</td><td>胶囊小火车前顺路</td></tr>
+                                <tr><td><strong>④ 西面</strong></td><td>6/14 15:45</td><td>Hottracks 西面店</td><td>City Walk 途中顺路</td></tr>
+                                <tr><td><strong>⑤ 南浦洞</strong></td><td>6/14 19:00</td><td>Hottracks 南浦洞店</td><td>BIFF 广场前顺路</td></tr>
+                                <tr><td><strong>⑥ 最后</strong></td><td>6/17 13:00</td><td>新世界百货（西面）</td><td>松岛缆车前如有时间</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="reminder">
+                        <strong>⚠️ 通用提醒：</strong><br>
+                        护照随身带（免税店/百货购买必须出示原件）<br>
+                        建议出发前致电乐天免税店确认库存：82-51-743-0181<br>
+                        当场验机：开机核对序列号、系统更新、eShop 访问<br>
+                        保留好购物小票和退税单，离境时金海机场办理退税<br>
+                        正常售价约 350,000-400,000 韩元，过低价格需警惕
+                    </div>
+
+                </div>
+            </div>
+        </article>
+
+        <!-- ===== Day 4 ===== -->
+        <article class="day-card">
+            <div class="day-header" onclick="toggleDay(this)">
+                <div>
+                    <span class="day-label">DAY 04</span>
+                    <span class="day-title">影岛 + 松岛缆车 · 返程</span>
+                    <span class="day-theme">6/17 周三</span>
+                </div>
+                <div class="day-toggle">
+                    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+            </div>
+            <div class="day-content">
+                <div class="day-body">
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">09:00</span>
+                            <span class="block-name">🚇 前往札嘎其</span>
+                        </div>
+                        <div class="block-desc">地铁 1 号线</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">10:00</span>
+                            <span class="block-name">🌉 影岛大桥拍照</span>
+                        </div>
+                        <div class="block-desc">影岛区域经典机位</div>
+                    </div>
+
+                    <div class="info-block food">
+                        <div class="block-header">
+                            <span class="block-time">11:30</span>
+                            <span class="block-name">🦀 午餐 · 札嘎其海鲜汤</span>
+                        </div>
+                        <div class="block-desc">자갈치해물탕 · 海鲜锅</div>
+                        <div class="block-addr">札嘎其市场内 · 预算约 35,000₩/2 人</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">13:00</span>
+                            <span class="block-name">🚡 松岛海上缆车</span>
+                        </div>
+                        <div class="block-desc">俯瞰松岛海岸线全景</div>
+                        <div class="block-addr">出租车从札嘎其约 10 分钟 · 预算约 30,000₩</div>
+                    </div>
+
+                    <div class="info-block attraction">
+                        <div class="block-header">
+                            <span class="block-time">14:00</span>
+                            <span class="block-name">🎮 Switch 2 最后机会 · 新世界百货</span>
+                        </div>
+                        <div class="block-desc">如果前面都没买到，最后补购</div>
+                        <div class="block-addr">西面商业区，松岛 → 西面约 20 分钟</div>
+                    </div>
+
+                    <div class="info-block food">
+                        <div class="block-header">
+                            <span class="block-time">14:30</span>
+                            <span class="block-name">☕ 轻食 · 海水堂咖啡</span>
+                        </div>
+                        <div class="block-desc">해수당 · 海景咖啡</div>
+                        <div class="block-addr">松岛海边 · 预算约 10,000₩</div>
+                    </div>
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">16:00</span>
+                            <span class="block-name">🚇 返回酒店取行李</span>
+                        </div>
+                    </div>
+
+                    <div class="info-block transport">
+                        <div class="block-header">
+                            <span class="block-time">16:30</span>
+                            <span class="block-name">🚇 前往金海机场</span>
+                        </div>
+                        <div class="block-desc">机场巴士/地铁 · 预留充足时间</div>
+                    </div>
+
+                    <div class="info-block flight">
+                        <div class="block-header">
+                            <span class="block-time">22:20</span>
+                            <span class="block-name">✈️ KE2061 起飞 · 返程北京</span>
+                        </div>
+                        <div class="block-desc">釜山 22:20 → 北京 00:05</div>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+
+        <!-- ===== T-Money ===== -->
+        <div class="section-title">💳 T-Money 交通卡</div>
+
+        <div style="background: var(--color-sage-light); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; font-size: 14px;">
+            <p style="margin-bottom: 8px;"><strong>📍 购买地点：</strong>金海机场到达大厅（1 楼）便利店 CU 或 7-Eleven</p>
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px;">
+                <tr style="border-bottom: 1px solid rgba(122,139,110,0.2);">
+                    <td style="padding: 4px 0; color: var(--color-text-light); width: 80px;">空卡费</td>
+                    <td style="padding: 4px 0;"><strong>₩3,000</strong>（约 ¥16）</td>
+                </tr>
+                <tr>
+                    <td style="padding: 4px 0; color: var(--color-text-light);">建议充值</td>
+                    <td style="padding: 4px 0;"><strong>₩10,000 - 20,000</strong>（约 ¥53-105）</td>
+                </tr>
+            </table>
+            <p style="margin-top: 8px; color: var(--color-text-light); font-size: 13px;">
+                💡 告诉店员：<strong>"T-Money 카드 주세요"</strong>，可同时用现金支付卡费和充值金额
+            </p>
+        </div>
+
+        <!-- ===== Budget ===== -->
+        <div class="section-title">💰 预算估算</div>
+
+        <div style="background: var(--color-bg-card); border-radius: 12px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); font-size: 14px;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 6px 0;">🍽️ 餐饮</td>
+                    <td style="padding: 6px 0; text-align: right;">200,000 - 250,000₩</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 6px 0;">💄 美妆 (Olive Young)</td>
+                    <td style="padding: 6px 0; text-align: right;">50,000 - 150,000₩</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 6px 0;">🚃 胶囊小火车</td>
+                    <td style="padding: 6px 0; text-align: right;">50,000₩/车</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 6px 0;">🚡 松岛缆车</td>
+                    <td style="padding: 6px 0; text-align: right;">30,000₩</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 6px 0;">🚇 地铁交通</td>
+                    <td style="padding: 6px 0; text-align: right;">30,000₩</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 6px 0;">💇🏻 美发</td>
+                    <td style="padding: 6px 0; text-align: right;">80,000 - 150,000₩</td>
+                </tr>
+                <tr style="border-top: 2px solid var(--color-accent);">
+                    <td style="padding: 8px 0;"><strong>合计（不含购物）</strong></td>
+                    <td style="padding: 8px 0; text-align: right;"><strong style="color: var(--color-accent);">约 350,000 - 500,000₩</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- ===== Apps ===== -->
+        <div class="section-title">📱 推荐 APP</div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px;">
+            <div style="background: var(--color-bg-card); border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                <strong>🗺️ 交通</strong><br>
+                <span style="color: var(--color-text-light);">Naver Map<br>KakaoMap<br>Kakao T</span>
+            </div>
+            <div style="background: var(--color-bg-card); border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                <strong>🍽️ 美食</strong><br>
+                <span style="color: var(--color-text-light);">Naver Map<br>小红书<br>TripAdvisor</span>
+            </div>
+            <div style="background: var(--color-bg-card); border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                <strong>🛍️ 购物</strong><br>
+                <span style="color: var(--color-text-light);">Naver<br>乐天/新世界免税店 APP</span>
+            </div>
+            <div style="background: var(--color-bg-card); border-radius: 8px; padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">
+                <strong>💡 出行组合</strong><br>
+                <span style="color: var(--color-text-light);">Naver Map + Kakao T<br>日常出行最佳搭配</span>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-icon">✈️🇰🇷</div>
+        <div class="footer-text">旅途愉快，平安归来</div>
+        <div>韩国 · 釜山 · 4 天 3 晚 · 2026.6.14 — 6.17</div>
+    </footer>
+
+    <script>
+        // Accordion toggle
+        function toggleDay(header) {
+            const card = header.closest('.day-card');
+            const isOpen = card.classList.contains('open');
+
+            // Close all
+            document.querySelectorAll('.day-card.open').forEach(c => {
+                c.classList.remove('open');
+            });
+
+            // Open clicked (if was closed)
+            if (!isOpen) {
+                card.classList.add('open');
+            }
+        }
+
+        // Scroll reveal animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.day-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Open first day by default
+        document.querySelector('.day-card').classList.add('open');
+    </script>
+</body>
+</html>
